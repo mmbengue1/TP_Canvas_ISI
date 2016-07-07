@@ -1,34 +1,43 @@
-/**
- * Created by Abdallah Mbengue on 7/6/2016.
- */
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var w = canvas.width, h = canvas.height;
-
-var carre = {
-    x: 0,
-    y: 0,
-    w: 50,
-    dessiner: function () {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillRect(this.x, this.y, this.w, this.w);
-    },
-    bouger: function () {
-
-        this.y += 1;
-        if (this.x > w)
-            this.x = -this.w;
-
-        if (this.y > h)
-            this.y = -this.w;
-        this.dessiner();
+var canvas1 = document.getElementById("canvas1");
+var ctx = canvas1.getContext("2d");
+var wC = canvas1.width, hC = canvas1.height;
+var canvas2 = document.getElementById("canvas2");
+var ctx2 = canvas2.getContext("2d");
 
 
-    }
+//Les titres des couleures
+var randColorTitle = ["blue", "red", "green", "yellow", "orange", "purple", "pink", "black", "brown", "beige"];
 
-}
+//Les couleures des carres
+var randColorSquare = ["blue", "red", "green", "yellow", "orange", "purple", "pink", "black", "brown", "beige"];
+function Carre(x,y,w)  {
+  this.positionX =x;
+  this.positionY =y;
+  this.width =w;
+  this.dessiner= function (ctx) {
+    ctx.clearRect(0, 0, wC, hC);
+    ctx.fillRect(this.positionX, this.positionY, this.width, this.width);
+    ctx.fillStyle = randColorSquare[Math.floor(Math.random() * randColorSquare.length)];
+  };
+  this.bouger =  function (ctx) {
 
+    this.positionY += 1;  //Vitesse ICI
+    if (this.positionX > wC)
+      this.positionX = -this.width;
 
+    if (this.positionY > hC)
+      this.positionY = -this.width;
+    this.dessiner(ctx);
+  }
+
+};
+
+  carre1 = new Carre(175,0,40);
+carre2 = new Carre(175,0,40);
 setInterval(function () {
-    carre.bouger();
-})
+
+  carre1.bouger(ctx);
+  carre2.bouger(ctx2);
+
+
+});

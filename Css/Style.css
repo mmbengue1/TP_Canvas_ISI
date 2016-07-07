@@ -1,3 +1,43 @@
-#canvas{
-    background-color: aqua;
+
+
+canvas {
+    display: inline-block;
+    border: 1px solid grey;
+}
+#first-canvas{
+    display: inline-block;
+    margin-left: 6%;
+}
+#second-canvas{
+
+    display: inline-block;
+}
+
+aside {
+    display: inline-block;
+    width: 27%;
+    vertical-align: top;
+    text-align: center;
+}
+
+aside div {
+    padding: 1%;
+    margin-bottom: 12.5%;
+}
+
+h2 {
+    width: 400px;
+    text-align: center;
+    border:1px solid grey;
+}
+
+#play-button{
+    padding: 5% 30%;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+button:hover{
+    color:white;
+    background-color: darkslategrey;
 }
