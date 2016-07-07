@@ -15,20 +15,22 @@ function Carre(x,y,w) {
     this.positionX = x;
     this.positionY = y;
     this.width = w;
-    this.dessiner = function (ctx,couleur1) {
+    this.dessiner = function (ctx,couleurCarre,couleurText,text) {
         ctx.clearRect(0, 0, wC, hC);
         ctx.fillRect(this.positionX, this.positionY, this.width, this.width);
-        ctx.fillStyle = couleur1;
+        ctx.fillStyle = couleurCarre;
+        ctx.fillText(text,10,50);
+        ctx.fillStyle = couleurText;
     };
-    this.bouger = function (ctx,couleur1) {
-
-        this.positionY += 1;  //Vitesse ICI
+    this.bouger = function (ctx,couleurCarre,couleurText,text) {
+        //Vitesse ICI
+        this.positionY += 1;
         if (this.positionX > wC)
             this.positionX = -this.width;
 
         if (this.positionY > hC)
             this.positionY = -this.width;
-        this.dessiner(ctx,couleur1);
+        this.dessiner(ctx,couleurCarre,couleurText,text);
 
     }
     /*this.manageClick = function (e, canvas) {
@@ -51,20 +53,19 @@ function Carre(x,y,w) {
 var jeu ={
     text:["blue", "red", "green", "yellow", "orange", "purple", "pink", "black", "brown", "beige"],
       color:  ["blue", "red", "green", "yellow", "orange", "purple", "pink", "black", "brown", "beige"]
+};
 
-}
+  carre1 = new Carre(175,0,80);
+carre2 = new Carre(175,0,80);
 
-  carre1 = new Carre(175,0,40);
-carre2 = new Carre(175,0,40);
-
-var couleur = randColorSquare[Math.floor(Math.random() * randColorSquare.length)];
-
-
-function startCarre(couleur) {
+var couleur1 = randColorSquare[Math.floor(Math.random() * randColorSquare.length)];
+var couleur2 = randColorSquare[Math.floor(Math.random() * randColorSquare.length)];
+var texte = randColorTitle[Math.floor(Math.random() * randColorTitle.length)];
+function startCarre(couleurCarre,couleurText,text) {
     setInterval(function () {
 
-        carre1.bouger(ctx, canvas1);
-        carre2.bouger(ctx2, canvas2);
+        carre1.bouger(ctx, couleurCarre,couleurText,text);
+        carre2.bouger(ctx2, couleurCarre,couleurText,text);
 
         //click sur le canavas 1
         canvas1.onclick = function (e) {
@@ -77,7 +78,7 @@ function startCarre(couleur) {
                 alert('carre manque');
             }
 
-        }
+        };
 
         //click sur le canavas 1
         canvas2.onclick = function (e) {
@@ -92,8 +93,7 @@ function startCarre(couleur) {
 
         }
 
-    }, 10);
+    });
 }
 
-
-startCarre(couleur);
+startCarre(couleur1,couleur2,texte);
