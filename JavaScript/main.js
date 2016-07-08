@@ -22,7 +22,7 @@ function Carre(x, y, w, couleur, text) {
 
     this.couleur = couleur;
     this.text = text;
-    this.dessiner = function (ctx, couleurText) {
+    this.dessiner = function (ctx) {
         ctx.clearRect(0, 0, wC, hC);
         ctx.fillRect(this.positionX, this.positionY, this.width, this.width);
         ctx.fillStyle = this.couleur;
@@ -36,7 +36,7 @@ function Carre(x, y, w, couleur, text) {
     this.bouger = function (ctx) {
         //Vitesse ICI
 
-        this.positionY += 1;
+        this.positionY += 10;
         if (this.positionX > wC)
             this.positionX = -this.width;
 
@@ -48,7 +48,7 @@ function Carre(x, y, w, couleur, text) {
             // on met  les textes des carres dans le dans les divs prevus pour les contenir dans le html
 
             var textMatch1 = document.getElementById("rand-color1");
-            textMatch1.innerHTML = carre1.text;
+            textMatch1.innerHTML = tabCarreCanvas1.text;
             var textMatch2 = document.getElementById("rand-color2");
             textMatch2.innerHTML = carre2.text;
 
@@ -56,35 +56,21 @@ function Carre(x, y, w, couleur, text) {
         this.dessiner(ctx);
 
     };
-    this.isTouch= function(canvas){
+    this.isTouch= function(mouseX,mouseY){
 
-        var py = this.positionY;
-        var px = this.positionX;
-        var wx = this.width;
-        var tT = this.couleur;
-        var tC = this.text;
-        canvas.onclick = function (e) {
-            var  elemLeft = canvas.offsetLeft;
-            var  elemTop = canvas.offsetTop;
-            var mouseX = e.layerX-elemLeft,
-                mouseY = e.layerY-elemTop;
-            var textScore = document.getElementById("score").innerHTML =score;
-            if (mouseY > py && mouseY < py+ wx && mouseX > px && mouseX < px + wx) {
-                if (tT == tC) {
-                    score += 10;
-                }
-                if (tT != tC) {
-                    score -= 10;
-                }
+            if (mouseY > this.positionY && mouseY < this.positionY + this.width && mouseX > this.positionX && mouseX < this.positionX + this.width) {
+               return true;
             } else {
-                alert('carre manque');
+                return false;
             }
-
-        };
     }
 
 
 }
+
+//
+var tabCarreCanvas1 =[];
+var tabCarreCanvas2 =[];
 
 //creation des objets
 
@@ -94,9 +80,12 @@ var texte = randColorTitle[Math.floor(Math.random() * randColorTitle.length)];
 
 carre1 = new Carre(175, 0, 80, couleur1, texte);
 carre2 = new Carre(175, 0, 80, couleur2, texte);
+tabCarreCanvas1.push(carre1);
+tabCarreCanvas2.push(carre2);
 //variable pour stocker l'intervalle
-var timer = -40000;
+var timer = 500;
 function startCarre() {
+
     game = setInterval(function () {
 
         carre1.bouger(ctx);
@@ -104,22 +93,45 @@ function startCarre() {
         carre2.bouger(ctx2);
 
         //click sur le canavas 1
+        canvas1.onclick = function (e) {
+            var mouseX = e.layerX,
+                mouseY = e.layerY;
 
+            for(var i =0 ;i < tabCarreCanvas1.length;i++){
+                if(tabCarreCanvas1[i].isTouch(mouseX,mouseY)){
+                    var textScore = document.getElementById("score").innerHTML =score;
+                    if (tabCarreCanvas1[i].couleur == tabCarreCanvas1[i].text) {
+                        score += 10;
+                    }
+                    if (tabCarreCanvas1[i].couleur != tabCarreCanvas1[i].text) {
+                        score -= 80;
+                    }console.log(score)
+                }
+                else{
+
+                }
+            }
+        }
 
         //click sur le canavas 2
         canvas2.onclick = function (e) {
             var mouseX = e.layerX,
                 mouseY = e.layerY;
-            if (mouseY > carre1.positionY && mouseY < carre1.positionY + carre1.width && mouseX > carre1.positionX && mouseX < carre1.positionX + carre1.width) {
 
-                alert('Carre touche');
-            } else {
-                alert('carre manque');
+            for(var i =0 ;i < tabCarreCanvas2.length;i++){
+                if(tabCarreCanvas1[i].isTouch(mouseX,mouseY)){
+                    var textScore = document.getElementById("score").innerHTML =score;
+                    if (tabCarreCanvas2[i].couleur == tabCarreCanvas2[i].text) {
+                        score += 10;
+                    }
+                    if (tabCarreCanvas2[i].couleur != tabCarreCanvas2[i].text) {
+                        score -= 80;
+                    }console.log(score)
+                }
             }
-
         }
 
-    }, timer);
+    },timer);
     var easy = document.getElementById("level1");
     easy.onclick = function (e) {
 
