@@ -1,14 +1,35 @@
+body {
+    background-color: rebeccapurple;
+}
+
+div {
+    background-color: white;
+    border: 5px solid black;
+}
+
+ol {
+    text-align: center;
+    list-style: none;
+}
+
+ol li {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
 canvas {
     display: inline-block;
-    border: 1px solid grey;
+    border-bottom: 3px solid black;
 }
-#first-canvas{
+
+#first-canvas {
     display: inline-block;
     margin-left: 6%;
 }
-#second-canvas{
 
+#second-canvas {
     display: inline-block;
+
 }
 
 aside {
@@ -16,6 +37,7 @@ aside {
     width: 27%;
     vertical-align: top;
     text-align: center;
+    margin-left: 150px;
 }
 
 aside div {
@@ -26,24 +48,22 @@ aside div {
 h2 {
     width: 400px;
     text-align: center;
-    border:1px solid grey;
 }
 
-#play-button{
+#play-button {
     padding: 5% 30%;
     font-size: xx-large;
     font-weight: bold;
 }
 
-button:hover{
-    color:white;
-    background-color: darkslategrey;
+button:hover {
+    color: white;
+    background-color: rebeccapurple;
 }
 
-
-#rand-color1{
+#rand-color1 {
     color: #f35626;
-    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-animation: hue 20s infinite linear;
@@ -59,7 +79,7 @@ button:hover{
     }
 }
 
-#rand-color2  {
+#rand-color2 {
     -webkit-animation-direction: normal;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
@@ -68,12 +88,28 @@ button:hover{
 }
 
 @-webkit-keyframes colours {
-    0% {color: #39f;}
-    15% {color: #8bc5d1;}
-    30% {color: #f8cb4a;}
-    45% {color: #95b850;}
-    60% {color: #944893;}
-    75% {color: #c71f00;}
-    90% {color: #bdb280;}
-    100% {color: #39f;}
+    0% {
+        color: #39f;
+    }
+    15% {
+        color: #8bc5d1;
+    }
+    30% {
+        color: #f8cb4a;
+    }
+    45% {
+        color: #95b850;
+    }
+    60% {
+        color: #944893;
+    }
+    75% {
+        color: #c71f00;
+    }
+    90% {
+        color: #bdb280;
+    }
+    100% {
+        color: #39f;
+    }
 }
